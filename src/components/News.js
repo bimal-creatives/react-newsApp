@@ -3,13 +3,21 @@ import NewsItem from './NewsItem'
 
 const News = () => {
 
-    const [articles, SetArticles] = useState()
+    const [articles, SetArticles] = useState({})
 
     useEffect(() => {
-        fetch('https://newsapi.org/v2/top-headlines?country=in&apiKey=3093a016d18647959e842117e4e63411')
-        .then (response => response.json)
-        .then (json => console.log(json))
-    }, [articles])
+        async function fetchData() {
+          const res = await fetch("https://newsapi.org/v2/top-headlines?country=in&apiKey=3093a016d18647959e842117e4e63411");
+          res
+            .json()
+            .then(res => SetArticles(res))
+            
+        }
+    
+        fetchData();
+        console.log(fetchData())
+      });
+
 
 
   return (
